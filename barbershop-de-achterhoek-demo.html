@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Barbershop De Achterhoek, Homepage Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15120E;
+    --ink-soft:#231E17;
+    --paper:#F8F4EC;
+    --paper-soft:#F1EBDD;
+    --brass:#B08A4E;
+    --brass-bright:#CDA968;
+    --rust:#7A3423;
+    --stone:#7d7568;
+    --line-dark: rgba(248,244,236,0.14);
+    --line-light: rgba(21,18,14,0.12);
+    --radius: 2px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    width:100%;
+  }
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit; text-decoration:none;}
+  h1,h2,h3{text-wrap:balance;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 20px;}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--brass);
+    font-weight:500;
+  }
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:500; line-height:1.1; letter-spacing:-0.01em;}
+  em{font-style:italic; color:var(--brass-bright);}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:15px 26px;
+    font-family:'Inter'; font-weight:600; font-size:14.5px;
+    border-radius:var(--radius);
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1), background .3s, border-color .3s, color .3s;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--ink); color:var(--paper);}
+  .btn-primary:hover{background:var(--rust);}
+  .btn-primary-inverse{background:var(--brass); color:var(--ink);}
+  .btn-primary-inverse:hover{background:var(--brass-bright);}
+  .btn-ghost{border-color:var(--line-light); color:var(--ink); background:transparent;}
+  .btn-ghost:hover{border-color:var(--ink);}
+  .btn-ghost-dark{border-color:var(--line-dark); color:var(--paper); background:transparent;}
+  .btn-ghost-dark:hover{border-color:var(--brass-bright); color:var(--brass-bright);}
+
+  /* ===== DEMO RIBBON ===== */
+  .demo-ribbon{
+    background:var(--ink); color:rgba(248,244,236,0.8);
+    font-family:'Inter', sans-serif; font-size:12px; font-weight:500;
+    text-align:center; padding:9px 16px; line-height:1.4;
+  }
+  .demo-ribbon b{color:var(--brass-bright); font-weight:600;}
+
+  /* ===== NAV ===== */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(248,244,236,0.92);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line-light);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 20px; max-width:1180px; margin:0 auto;
+  }
+  .logo{font-family:'Fraunces', serif; font-weight:600; font-size:18px; letter-spacing:-0.01em;}
+  .logo span{color:var(--brass);}
+  .nav-links{display:none; gap:34px; align-items:center;}
+  .nav-links a{font-size:14px; font-weight:500; color:var(--ink); opacity:.75; transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;}
+  .nav-cta{display:flex; align-items:center; gap:14px;}
+  .nav-cta .btn{padding:11px 18px; font-size:13.5px;}
+  .burger{
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    background:none; border:none; cursor:pointer; width:38px; height:38px; flex-shrink:0;
+  }
+  .burger span{display:block; width:20px; height:1.5px; background:var(--ink); margin:2.5px 0; transition:transform .3s ease, opacity .3s ease;}
+  .burger.active span:nth-child(1){transform:translateY(4px) rotate(45deg);}
+  .burger.active span:nth-child(2){opacity:0;}
+  .burger.active span:nth-child(3){transform:translateY(-4px) rotate(-45deg);}
+  .mobile-menu{
+    max-height:0; overflow:hidden; background:var(--paper);
+    border-top:0 solid var(--line-light);
+    transition:max-height .35s ease;
+  }
+  .mobile-menu.open{max-height:280px; border-top-width:1px;}
+  .mobile-menu a{
+    display:block; padding:15px 20px; font-size:15.5px; font-weight:500;
+    border-bottom:1px solid var(--line-light);
+  }
+  .mobile-menu a:last-child{color:var(--brass); font-weight:600;}
+
+  /* ===== HERO ===== */
+  .hero{padding:36px 0 44px; position:relative; overflow:hidden;}
+  .hero-grid{display:grid; grid-template-columns:1fr; gap:34px; align-items:center;}
+  .hero h1{font-size:clamp(34px, 9vw, 64px); margin:16px 0 20px;}
+  .hero p.lead{font-size:16.5px; color:var(--stone); margin-bottom:28px; line-height:1.6;}
+  .hero-ctas{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:24px;}
+  .hero-ctas .btn{flex:1 1 auto; min-width:150px;}
+  .hero-meta{display:flex; flex-direction:column; gap:5px; font-size:13.5px; color:var(--stone); margin-bottom:26px;}
+  .hero-meta .dot-sep{display:none;}
+  .hero-trust{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .stars{color:var(--brass); font-size:15px; letter-spacing:2px;}
+  .hero-trust-text{font-size:13px; color:var(--stone);}
+  .hero-trust-text b{color:var(--ink);}
+
+  .hero-visual{
+    position:relative; aspect-ratio:16/11; border-radius:4px; overflow:hidden;
+    background:linear-gradient(155deg, #1C1811 0%, #15120E 60%);
+    border:1px solid var(--line-dark);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .photo-placeholder{
+    position:absolute; inset:14px;
+    border:1px dashed rgba(205,169,104,0.35); border-radius:2px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:28px 22px;
+  }
+  .photo-placeholder svg{width:30px; height:30px; color:var(--brass); margin-bottom:16px; opacity:0.85;}
+  .photo-placeholder .p1{font-family:'Fraunces'; font-size:16px; color:var(--paper); margin-bottom:8px; max-width:260px; line-height:1.4;}
+  .photo-placeholder .p2{font-family:'Inter'; font-size:12px; color:rgba(248,244,236,0.5); max-width:230px; line-height:1.6;}
+
+  /* ===== STATS ===== */
+  .stats{background:var(--ink); color:var(--paper); padding:40px 0;}
+  .stats-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:28px 16px;}
+  .stat{border-left:1px solid var(--line-dark); padding-left:16px;}
+  .stat .num{font-family:'JetBrains Mono', monospace; font-size:clamp(24px,6vw,38px); color:var(--brass-bright); font-weight:500;}
+  .stat .lbl{font-size:12.5px; color:rgba(248,244,236,0.6); margin-top:5px;}
+
+  /* ===== SECTION HEAD ===== */
+  .section{padding:60px 0;}
+  .section-head{max-width:600px; margin-bottom:36px;}
+  .section-head h2{font-size:clamp(26px,6.5vw,42px); margin-top:12px;}
+  .section-head p{color:var(--stone); font-size:15.5px; margin-top:14px; line-height:1.6;}
+
+  /* ===== USPs ===== */
+  .usp-grid{display:grid; grid-template-columns:1fr; gap:1px; background:var(--line-light); border:1px solid var(--line-light);}
+  .usp-card{background:var(--paper); padding:26px 22px; transition:background .3s;}
+  .usp-card:hover{background:var(--paper-soft);}
+  .usp-icon{width:30px; height:30px; margin-bottom:16px; color:var(--brass);}
+  .usp-card h3{font-size:17px; margin-bottom:8px; font-weight:500;}
+  .usp-card p{font-size:14px; color:var(--stone); line-height:1.55;}
+
+  /* ===== SERVICES ===== */
+  .services-grid{display:grid; grid-template-columns:1fr; gap:16px;}
+  .service-card{
+    border:1px solid var(--line-light); border-radius:3px; padding:28px 24px;
+    display:flex; flex-direction:column; gap:14px; background:var(--paper);
+    transition:transform .35s cubic-bezier(.2,.8,.2,1), border-color .3s;
+  }
+  .service-card:hover{transform:translateY(-4px); border-color:var(--brass);}
+  .service-icon{width:34px; height:34px; color:var(--rust);}
+  .service-card h3{font-size:19px;}
+  .service-card p{font-size:14px; color:var(--stone); line-height:1.6;}
+  .services-note{margin-top:28px; font-size:13px; color:var(--stone); text-align:center; font-style:italic;}
+
+  /* ===== REVIEWS ===== */
+  .reviews-section{background:var(--paper-soft); border-top:1px solid var(--line-light); border-bottom:1px solid var(--line-light);}
+  .reviews-grid{display:grid; grid-template-columns:1fr; gap:16px;}
+  .review-card{background:var(--paper); border:1px solid var(--line-light); border-radius:3px; padding:24px;}
+  .review-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;}
+  .review-stars{color:var(--brass); font-size:14px; letter-spacing:2px;}
+  .review-src{font-family:'JetBrains Mono'; font-size:10px; color:var(--stone); text-transform:uppercase; letter-spacing:.06em;}
+  .review-card p{font-size:14px; line-height:1.65; color:var(--ink-soft); margin-bottom:16px;}
+  .review-name{font-size:13px; font-weight:600; color:var(--stone);}
+  .reviews-note{text-align:center; margin-top:26px; font-size:13px; color:var(--stone); font-style:italic;}
+
+  /* ===== LOCATION / BOOKING ===== */
+  .location{background:var(--ink); color:var(--paper);}
+  .location-grid{display:grid; grid-template-columns:1fr; gap:32px; align-items:center;}
+  .location h2{color:var(--paper); font-size:clamp(26px,6.5vw,40px); margin:12px 0 16px;}
+  .location p.lead{color:rgba(248,244,236,0.65); font-size:15.5px; margin-bottom:26px; line-height:1.6;}
+  .hours-table{width:100%; border-collapse:collapse; margin-bottom:28px;}
+  .hours-table tr{border-bottom:1px solid var(--line-dark);}
+  .hours-table td{padding:11px 0; font-size:14px;}
+  .hours-table td:first-child{color:rgba(248,244,236,0.55);}
+  .hours-table td:last-child{text-align:right; font-family:'JetBrains Mono'; font-size:12.5px;}
+  .hours-table tr.today td{color:var(--brass-bright); font-weight:600;}
+  .loc-ctas{display:flex; gap:12px; flex-wrap:wrap;}
+  .loc-ctas .btn{flex:1 1 auto; min-width:150px;}
+  .map-card{
+    order:-1; aspect-ratio:16/10; border:1px solid var(--line-dark); border-radius:3px;
+    position:relative; overflow:hidden; background:var(--ink-soft);
+  }
+  .map-card iframe{width:100%; height:100%; border:0; filter:grayscale(0.25) contrast(1.05);}
+  .map-pin-label{
+    position:absolute; top:14px; left:14px; background:var(--brass); color:var(--ink);
+    font-size:12px; padding:7px 11px; border-radius:2px; font-weight:600; pointer-events:none;
+  }
+
+  /* ===== ASIDE / OWNER PANELS ===== */
+  .owner-aside{background:var(--paper-soft); border-top:1px solid var(--line-light); border-bottom:1px solid var(--line-light);}
+  .owner-panel{
+    border-left:3px solid var(--brass); padding:6px 0 6px 18px;
+  }
+  .owner-tag{
+    display:inline-block; font-size:11px; font-weight:600; color:var(--rust);
+    background:rgba(122,52,35,0.08); padding:5px 11px; border-radius:20px; margin-bottom:14px;
+  }
+  .owner-panel h2{font-size:clamp(22px,5.5vw,34px); margin-bottom:14px;}
+  .owner-panel > p{color:var(--stone); font-size:15px; line-height:1.65; margin-bottom:24px;}
+  .value-list{display:grid; grid-template-columns:1fr; gap:14px;}
+  .value-item{display:flex; align-items:flex-start; gap:10px; font-size:14.5px;}
+  .value-item .check{color:var(--brass); font-weight:700; flex-shrink:0;}
+
+  .expansion-panel{padding-top:36px;}
+  .expansion-list{display:grid; grid-template-columns:1fr; gap:10px;}
+  .expansion-item{
+    border:1px solid var(--line-light); background:var(--paper); border-radius:3px;
+    padding:16px 18px; font-size:14px; display:flex; align-items:center; gap:12px;
+  }
+  .expansion-item .mark{width:8px; height:8px; border-radius:50%; background:var(--brass); flex-shrink:0;}
+
+  /* ===== FINAL CTA ===== */
+  .final-cta{padding:70px 0; text-align:center;}
+  .final-cta h2{font-size:clamp(30px,8vw,54px); margin-bottom:18px;}
+  .final-cta p{color:var(--stone); font-size:16px; margin-bottom:30px;}
+  .final-cta-ctas{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
+  .final-cta-ctas .btn{flex:1 1 auto; min-width:150px;}
+
+  /* ===== FOOTER ===== */
+  footer{border-top:1px solid var(--line-light); padding:44px 0 110px;}
+  .footer-grid{display:flex; flex-direction:column; gap:32px; margin-bottom:32px;}
+  .footer-brand .logo{margin-bottom:12px;}
+  .footer-brand p{font-size:13.5px; color:var(--stone); max-width:320px; line-height:1.6;}
+  .footer-col h4{font-family:'JetBrains Mono'; font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:var(--stone); margin-bottom:12px;}
+  .footer-col a, .footer-col p{display:block; font-size:14px; margin-bottom:9px; color:var(--ink); opacity:.8;}
+  .footer-social{display:flex; gap:12px;}
+  .footer-social a{width:36px; height:36px; border:1px solid var(--line-light); border-radius:50%; display:flex; align-items:center; justify-content:center;}
+  .footer-social svg{width:16px; height:16px;}
+  .footer-bottom{border-top:1px solid var(--line-light); padding-top:20px; display:flex; flex-direction:column; gap:8px; font-size:12px; color:var(--stone);}
+  .footer-bottom .credit{font-family:'Inter';}
+  .footer-bottom .credit b{color:var(--brass);}
+
+  /* ===== MOBILE STICKY CTA ===== */
+  .mobile-sticky{
+    display:flex; position:fixed; bottom:0; left:0; right:0; z-index:60;
+    background:var(--ink); border-top:1px solid var(--line-dark);
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom)); gap:10px; align-items:center;
+  }
+  .mobile-sticky a{flex:1; text-align:center; padding:13px 0; border-radius:2px; font-weight:600; font-size:14px;}
+  .mobile-sticky a.call{background:transparent; border:1px solid var(--line-dark); color:var(--paper);}
+  .mobile-sticky a.book{background:var(--brass); color:var(--ink);}
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1);}
+  .reveal.in{opacity:1; transform:none;}
+
+  /* ===== TABLET (min-width 761) ===== */
+  @media (min-width:761px){
+    .wrap{padding:0 32px;}
+    .demo-ribbon{font-size:12.5px; padding:10px 16px;}
+    nav{padding:18px 32px;}
+    .logo{font-size:19px;}
+    .nav-links{display:flex;}
+    .nav-cta .btn{padding:15px 26px; font-size:14.5px;}
+    .burger, .mobile-menu{display:none;}
+    .mobile-sticky{display:none;}
+    footer{padding-bottom:56px;}
+
+    .hero{padding:72px 0 60px;}
+    .hero-ctas .btn{flex:0 1 auto; min-width:0;}
+    .hero-meta{flex-direction:row; align-items:center; gap:0;}
+    .hero-meta .dot-sep{display:inline; margin:0 8px;}
+    .hero-visual{aspect-ratio:16/10;}
+
+    .stats{padding:56px 0;}
+    .stat{padding-left:22px;}
+
+    .section{padding:80px 0;}
+    .section-head{margin-bottom:48px;}
+
+    .usp-grid{grid-template-columns:repeat(2,1fr);}
+    .usp-card{padding:32px 26px;}
+
+    .location-grid{grid-template-columns:1fr 1fr; gap:48px;}
+    .map-card{order:0; aspect-ratio:1/1;}
+    .loc-ctas .btn{flex:0 1 auto; min-width:0;}
+
+    .value-list{grid-template-columns:repeat(2,1fr); gap:16px 28px;}
+    .expansion-list{grid-template-columns:repeat(2,1fr);}
+    .owner-panel{padding-left:26px;}
+
+    .final-cta{padding:96px 0;}
+    .final-cta-ctas .btn{flex:0 1 auto; min-width:0;}
+
+    .footer-grid{flex-direction:row; justify-content:space-between; align-items:flex-start; gap:40px;}
+    .footer-bottom{flex-direction:row; justify-content:space-between;}
+  }
+
+  /* ===== DESKTOP (min-width 981) ===== */
+  @media (min-width:981px){
+    .hero{padding:96px 0 70px;}
+    .hero-grid{grid-template-columns:1.15fr 0.85fr; gap:60px;}
+    .hero-visual{aspect-ratio:4/5;}
+    .photo-placeholder{inset:18px; padding:40px 30px;}
+    .photo-placeholder svg{width:34px; height:34px; margin-bottom:20px;}
+    .photo-placeholder .p1{font-size:17px;}
+
+    .stats-grid{grid-template-columns:repeat(4,1fr); gap:20px;}
+
+    .section{padding:100px 0;}
+
+    .usp-grid{grid-template-columns:repeat(4,1fr);}
+    .usp-card{padding:34px 26px;}
+
+    .services-grid{grid-template-columns:repeat(3,1fr); gap:24px;}
+    .reviews-grid{grid-template-columns:repeat(3,1fr); gap:22px;}
+
+    .value-list{grid-template-columns:repeat(3,1fr); max-width:820px;}
+    .expansion-list{grid-template-columns:repeat(3,1fr); max-width:900px;}
+    .owner-panel > p{max-width:640px;}
+
+    .final-cta{padding:120px 0;}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-ribbon">Vrijblijvende homepage-demo, ontworpen door <b>DZ Digital</b> voor Barbershop De Achterhoek</div>
+
+<header>
+  <nav>
+    <div class="logo">Barbershop <span>De Achterhoek</span></div>
+    <div class="nav-links">
+      <a href="#behandelingen">Behandelingen</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#locatie">Locatie</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#book" class="btn btn-primary">Boek afspraak</a>
+      <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#behandelingen">Behandelingen</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#locatie">Locatie</a>
+    <a href="tel:+31611263861">Bel 06 11 26 38 61</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow reveal">Stationsstraat 28, Doetinchem</span>
+        <h1 class="reveal">Altijd strak verzorgd de deur uit.</h1>
+        <p class="lead reveal">Bij ons gaat het niet alleen om een knipbeurt. Onze barbiers nemen de tijd om precies te doen wat bij jou past, zodat je zelfverzekerd en verzorgd naar buiten stapt. Met of zonder afspraak welkom.</p>
+        <div class="hero-ctas reveal">
+          <a href="#book" class="btn btn-primary">Boek je afspraak</a>
+          <a href="#behandelingen" class="btn btn-ghost">Bekijk behandelingen</a>
+        </div>
+        <p class="hero-meta reveal">
+          <span>📍 Stationsstraat 28, Doetinchem</span>
+          <span class="dot-sep">·</span>
+          <span id="statusText">Vandaag geopend</span>
+        </p>
+        <div class="hero-trust reveal">
+          <span class="stars">★★★★★</span>
+          <span class="hero-trust-text"><b>5.0</b> beoordeeld door <b>440+</b> klanten op Google</span>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="photo-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/></svg>
+          <div class="p1">Hier komt een professionele foto van jullie zaak.</div>
+          <div class="p2">In de definitieve website gebruiken we eigen fotografie voor een persoonlijke uitstraling.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat reveal"><div class="num">5.0</div><div class="lbl">Google beoordeling</div></div>
+      <div class="stat reveal"><div class="num">440+</div><div class="lbl">Klantreviews</div></div>
+      <div class="stat reveal"><div class="num">1.000+</div><div class="lbl">Volgers op Instagram</div></div>
+      <div class="stat reveal"><div class="num">7</div><div class="lbl">Dagen per week open</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="waarom">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Waarom klanten terugkomen</span>
+      <h2>Het zit 'm in de details.</h2>
+      <p>Een goede knipbeurt is meer dan de schaar alleen. Het is de aandacht eromheen, en dat is precies waar onze klanten voor terugkomen.</p>
+    </div>
+    <div class="usp-grid reveal">
+      <div class="usp-card">
+        <svg class="usp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <h3>Zonder afspraak welkom</h3>
+        <p>Sta je toevallig in de buurt? Loop gerust binnen, we maken graag tijd voor je.</p>
+      </div>
+      <div class="usp-card">
+        <svg class="usp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l2.5 6.5L21 11l-6.5 2.5L12 20l-2.5-6.5L3 11l6.5-2.5z"/></svg>
+        <h3>Ervaren barbiers</h3>
+        <p>Onze barbiers kennen hun vak en nemen de tijd om precies te doen wat bij jou past.</p>
+      </div>
+      <div class="usp-card">
+        <svg class="usp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+        <h3>Hartje centrum</h3>
+        <p>Stationsstraat 28, middenin Doetinchem. Makkelijk te vinden en te parkeren.</p>
+      </div>
+      <div class="usp-card">
+        <svg class="usp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="17" rx="1.5"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+        <h3>7 dagen per week open</h3>
+        <p>Van maandagmiddag tot zondagmiddag is er altijd wel een moment dat jou uitkomt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="behandelingen" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Behandelingen</span>
+      <h2>Een kleine indruk van onze behandelingen.</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M6 6l12 12M6 18L18 6"/><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/></svg>
+        <h3>Knippen</h3>
+        <p>Een knipbeurt die past bij wie je bent, of je nu voor een klassieke of een moderne look gaat.</p>
+      </div>
+      <div class="service-card reveal">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 12c2-6 6-9 8-9s6 3 8 9-2 9-8 9-10-3-8-9z"/></svg>
+        <h3>Baard &amp; Scheren</h3>
+        <p>Een strak bijgewerkte baard of een ouderwetse scheerbeurt met warme handdoek, precies zoals het hoort.</p>
+      </div>
+      <div class="service-card reveal">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg>
+        <h3>Complete verzorging</h3>
+        <p>Knip, baard en styling in één afspraak. Je stapt naar buiten en voelt meteen het verschil.</p>
+      </div>
+    </div>
+    <p class="services-note">De volledige behandelingen- en prijspagina wordt onderdeel van de complete website.</p>
+  </div>
+</section>
+
+<section class="reviews-section section" id="reviews">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Wat klanten zeggen</span>
+      <h2>440+ klanten gingen je voor.</h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="review-top"><span class="review-stars">★★★★★</span><span class="review-src">Google</span></div>
+        <p>Precies geknipt zoals ik het vroeg. Vriendelijke ontvangst en een echt vakkundig eindresultaat, ik kom zeker terug.</p>
+        <div class="review-name">Youri</div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-top"><span class="review-stars">★★★★★</span><span class="review-src">Google</span></div>
+        <p>Rustige, prettige sfeer en een barbier die echt de tijd neemt. Mijn baard heeft nog nooit zo strak gezeten.</p>
+        <div class="review-name">Mark</div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-top"><span class="review-stars">★★★★★</span><span class="review-src">Google</span></div>
+        <p>Ook zonder afspraak snel geholpen. Inmiddels de vaste plek voor mij en mijn zoon geworden, top service.</p>
+        <div class="review-name">Dennis</div>
+      </div>
+    </div>
+    <p class="reviews-note">Dit zijn voorbeeldreviews. In de definitieve website worden hier automatisch je meest recente Google Reviews getoond.</p>
+  </div>
+</section>
+
+<section class="location section" id="locatie">
+  <div class="wrap">
+    <div class="location-grid">
+      <div>
+        <span class="eyebrow">Locatie &amp; openingstijden</span>
+        <h2>Loop binnen, of leg 'm vooraf vast.</h2>
+        <p class="lead">Stationsstraat 28, midden in het centrum van Doetinchem. Zonder afspraak welkom, maar wie zeker wil zijn boekt vooraf.</p>
+        <table class="hours-table" id="hoursTable">
+          <tr data-day="1"><td>Maandag</td><td>12:00 – 18:00</td></tr>
+          <tr data-day="2"><td>Dinsdag</td><td>09:00 – 18:00</td></tr>
+          <tr data-day="3"><td>Woensdag</td><td>09:00 – 18:00</td></tr>
+          <tr data-day="4"><td>Donderdag</td><td>09:00 – 20:00</td></tr>
+          <tr data-day="5"><td>Vrijdag</td><td>09:00 – 20:00</td></tr>
+          <tr data-day="6"><td>Zaterdag</td><td>09:00 – 19:00</td></tr>
+          <tr data-day="0"><td>Zondag</td><td>13:00 – 18:00</td></tr>
+        </table>
+        <div class="loc-ctas">
+          <a href="tel:+31611263861" class="btn btn-primary-inverse">Bel 06 11 26 38 61</a>
+          <a href="https://wa.me/31611263861" class="btn btn-ghost-dark">WhatsApp</a>
+        </div>
+      </div>
+      <div class="map-card reveal">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2458.6149866819533!2d6.288997276814439!3d51.95921207759686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c7858e186816d5%3A0xe97e6978076839cf!2sBarbershop%20De%20Achterhoek!5e0!3m2!1snl!2snl!4v1757452174003!5m2!1snl!2snl" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Locatie Barbershop De Achterhoek"></iframe>
+        <div class="map-pin-label">Stationsstraat 28</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="owner-aside">
+  <div class="wrap section" style="padding-bottom:50px;">
+    <div class="owner-panel reveal">
+      <span class="owner-tag">Voor jou als ondernemer</span>
+      <h2>Meer dan alleen een mooie website.</h2>
+      <p>Een goed ontwerp is het startpunt, niet het doel. Een website zoals deze is er vooral om jouw zaak sterker neer te zetten in Doetinchem.</p>
+      <div class="value-list">
+        <div class="value-item"><span class="check">✓</span> Meer vertrouwen bij nieuwe klanten</div>
+        <div class="value-item"><span class="check">✓</span> Beter gevonden worden in Google</div>
+        <div class="value-item"><span class="check">✓</span> Meer online afspraken</div>
+        <div class="value-item"><span class="check">✓</span> Snellere website</div>
+        <div class="value-item"><span class="check">✓</span> Perfect op mobiel</div>
+      </div>
+      <p style="margin-top:22px; font-size:13px; color:var(--stone); font-style:italic;">Dit zijn voorbeelden van wat mogelijk is binnen de complete website.</p>
+    </div>
+    <div class="owner-panel expansion-panel reveal">
+      <span class="owner-tag">Dit is nog maar het begin</span>
+      <h2 style="font-size:24px;">Voorbeeld van mogelijke uitbreidingen</h2>
+      <div class="expansion-list" style="margin-top:20px;">
+        <div class="expansion-item"><span class="mark"></span>Online afspraken plannen</div>
+        <div class="expansion-item"><span class="mark"></span>Automatische Google Reviews</div>
+        <div class="expansion-item"><span class="mark"></span>Fotogalerij</div>
+        <div class="expansion-item"><span class="mark"></span>Behandelingen &amp; prijzen</div>
+        <div class="expansion-item"><span class="mark"></span>SEO-optimalisatie</div>
+        <div class="expansion-item"><span class="mark"></span>WhatsApp-integratie</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta" id="book">
+  <div class="wrap">
+    <span class="eyebrow reveal">Klaar voor een frisse look?</span>
+    <h2 class="reveal">Boek vandaag nog je afspraak.</h2>
+    <p class="reveal">Bellen, appen of straks direct online boeken. Jij kiest wat het makkelijkst werkt.</p>
+    <div class="final-cta-ctas reveal">
+      <a href="tel:+31611263861" class="btn btn-primary">Bel direct</a>
+      <a href="https://wa.me/31611263861" class="btn btn-ghost">Stuur een WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">Barbershop <span>De Achterhoek</span></div>
+        <p>Herenkapper in het hart van Doetinchem. Vakmanschap, persoonlijke aandacht en een strakke afwerking, iedere keer weer.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:+31611263861">06 11 26 38 61</a>
+        <a href="https://wa.me/31611263861">WhatsApp</a>
+        <p>Stationsstraat 28, Doetinchem</p>
+      </div>
+      <div class="footer-col">
+        <h4>Volg ons</h4>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/barbershopdeachterhoek/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="https://www.facebook.com/p/Barbershop-De-Achterhoek-100063917057165/" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 8h-2a2 2 0 0 0-2 2v10M8 13h6"/><circle cx="12" cy="12" r="9.5"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Barbershop De Achterhoek</span>
+      <span class="credit">Concept homepage door <b>DZ Digital</b>, dzdigital.nl</span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-sticky">
+  <a href="tel:+31611263861" class="call">Bel</a>
+  <a href="https://wa.me/31611263861" class="book">WhatsApp</a>
+</div>
+
+<script>
+  // Live open status, shown as plain text under the hero CTAs
+  const hours = {0:[13,18],1:[12,18],2:[9,18],3:[9,18],4:[9,20],5:[9,20],6:[9,19]};
+  const now = new Date();
+  const day = now.getDay();
+  const h = now.getHours() + now.getMinutes()/60;
+  const [open, close] = hours[day];
+  const isOpen = h >= open && h < close;
+  const statusText = document.getElementById('statusText');
+  function fmt(n){ const hh = Math.floor(n); const mm = Math.round((n-hh)*60); return hh + (mm ? ':' + String(mm).padStart(2,'0') : ':00'); }
+  if(isOpen){
+    statusText.textContent = 'Vandaag geopend tot ' + fmt(close);
+  } else {
+    statusText.textContent = h < open ? 'Vandaag open vanaf ' + fmt(open) : 'Nu gesloten, morgen weer open';
+  }
+  document.querySelectorAll('#hoursTable tr').forEach(tr=>{
+    if(parseInt(tr.dataset.day) === day) tr.classList.add('today');
+  });
+
+  // Mobile menu toggle
+  const burger = document.getElementById('burgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    const isOpenMenu = mobileMenu.classList.toggle('open');
+    burger.classList.toggle('active', isOpenMenu);
+    burger.setAttribute('aria-expanded', isOpenMenu ? 'true' : 'false');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      burger.classList.remove('active');
+      burger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Reveal on scroll
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(prefersReduced){
+    document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+    }, {threshold:0.15});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  }
+</script>
+
+</body>
+</html>

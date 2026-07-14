@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DZ Brands — Sectie: Laatste CTA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #14161A;
+    --white: #FFFFFF;
+    --stone-900: #1F2226;
+    --stone-700: #3D4148;
+    --stone-500: #6B7077;
+    --stone-300: #A8ACB2;
+    --stone-100: #E4E6E9;
+    --stone-50: #F7F8F9;
+    --copper: #C9663A;
+    --copper-dark: #A8512B;
+    --copper-light: #F3E4DC;
+    --green: #3D8361;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ---------- NAVBAR (identiek aan hero) ---------- */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 104px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 56px;
+    z-index: 100;
+    background: rgba(255,255,255,0.86);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-bottom: 1px solid var(--stone-100);
+  }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo-mark { width: 30px; height: 30px; flex-shrink: 0; }
+  .logo-word { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .logo-word span { color: var(--copper); }
+  .nav-links { display: flex; gap: 40px; align-items: center; }
+  .nav-links a {
+    position: relative; font-size: 14px; font-weight: 450; color: var(--stone-700);
+    text-decoration: none; padding-bottom: 4px; transition: color 0.2s ease-out;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; left: 0; bottom: 0; width: 0%; height: 1px;
+    background: var(--ink); transition: width 0.25s ease-out;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    font-size: 13.5px; font-weight: 600; color: var(--white); background: var(--ink);
+    padding: 10px 19px; border-radius: 7px; text-decoration: none;
+    transition: transform 0.18s ease-out, background 0.18s ease-out;
+  }
+  .nav-cta:hover { transform: translateY(-1px); background: var(--stone-900); }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    padding: 188px 24px 64px;
+    max-width: 1280px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute;
+    top: -260px;
+    right: -260px;
+    width: 820px;
+    height: 820px;
+    background: radial-gradient(circle, var(--copper-light) 0%, transparent 62%);
+    opacity: 0.45;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-top {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  .hero-text { max-width: 100%; }
+  h1 {
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
+  }
+  h1 em { font-style: normal; color: var(--copper); }
+  .subheadline {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--stone-700);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.18s forwards;
+  }
+  .cta-block {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    background: var(--stone-50);
+    border: 1px solid var(--stone-100);
+    border-radius: 14px;
+    width: 100%;
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.28s forwards;
+  }
+  .btn-primary {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    background: linear-gradient(180deg, #D4754A 0%, var(--copper) 55%, var(--copper-dark) 100%);
+    padding: 17px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.25),
+      0 1px 2px rgba(20,22,26,0.06),
+      0 10px 24px rgba(201,102,58,0.22);
+    transition: box-shadow 0.25s ease-out, transform 0.25s ease-out;
+    min-height: 44px;
+  }
+  .btn-primary svg { width: 17px; height: 17px; transition: transform 0.25s ease-out; flex-shrink: 0; }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.3),
+      0 1px 2px rgba(20,22,26,0.06),
+      0 16px 32px rgba(201,102,58,0.3);
+  }
+  .btn-primary:hover svg { transform: translateX(3px); }
+  .btn-primary:active { transform: translateY(0); }
+  .trust-label {
+    font-size: 12.5px;
+    color: var(--stone-500);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-left: 2px;
+    text-align: left;
+  }
+  .trust-label .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(61,131,97,0.16);
+  }
+
+  /* ---------- MOCKUP — centerpiece ---------- */
+  .mockup-stage {
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
+  }
+  .mockup-floor {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92%;
+    height: 50px;
+    background: radial-gradient(ellipse, rgba(20,22,26,0.16) 0%, transparent 75%);
+    filter: blur(4px);
+    z-index: 0;
+  }
+  .browser {
+    position: relative;
+    background: var(--white);
+    border: 1px solid rgba(20,22,26,0.06);
+    border-radius: 14px;
+    box-shadow:
+      0 1px 1px rgba(20,22,26,0.03),
+      0 2px 6px rgba(20,22,26,0.04),
+      0 12px 28px rgba(20,22,26,0.10),
+      0 28px 60px rgba(20,22,26,0.12);
+    overflow: hidden;
+    z-index: 2;
+  }
+  .browser-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--stone-100);
+    background: linear-gradient(180deg, #FCFCFC 0%, var(--stone-50) 100%);
+  }
+  .browser-dots { display: flex; gap: 6px; }
+  .browser-dots span { width: 9px; height: 9px; border-radius: 50%; background: var(--stone-300); }
+  .browser-url {
+    flex: 1;
+    background: var(--white);
+    border: 1px solid var(--stone-100);
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 11px;
+    color: var(--stone-500);
+    text-align: center;
+  }
+  .site { --s-ink: #1C2B22; --s-green: #3F6B4F; --s-cream: #F6F4EE; --s-line: #E5E2D6; font-family: 'Inter', sans-serif; }
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--s-line);
+    background: var(--white);
+  }
+  .site-logo { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: var(--s-ink); letter-spacing: -0.01em; }
+  .site-logo .mk { width: 16px; height: 16px; border-radius: 5px; background: var(--s-green); }
+  .site-nav-links { display: none; }
+  .site-nav-btn { font-size: 10.5px; font-weight: 600; color: var(--s-cream); background: var(--s-green); padding: 7px 12px; border-radius: 7px; }
+  .site-hero {
+    position: relative;
+    text-align: center;
+    padding: 40px 24px 36px;
+    background:
+      radial-gradient(ellipse 500px 240px at 50% 0%, rgba(63,107,79,0.08), transparent 70%),
+      var(--s-cream);
+    overflow: hidden;
+  }
+  .site-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--s-green);
+    background: rgba(63,107,79,0.10);
+    padding: 5px 11px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+    letter-spacing: 0.01em;
+  }
+  .site-eyebrow .d { width: 5px; height: 5px; border-radius: 50%; background: var(--s-green); }
+  .site-h1 {
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--s-ink);
+    margin-bottom: 12px;
+  }
+  .site-sub { font-size: 12.5px; color: #5C6657; max-width: 320px; margin: 0 auto 20px; line-height: 1.55; }
+  .site-btns { display: flex; flex-direction: column; gap: 10px; }
+  .site-btn-primary { font-size: 12px; font-weight: 600; color: var(--s-cream); background: var(--s-ink); padding: 11px 20px; border-radius: 9px; box-shadow: 0 8px 20px rgba(28,43,34,0.18); }
+  .site-btn-secondary { font-size: 12px; font-weight: 600; color: var(--s-ink); background: var(--white); border: 1px solid var(--s-line); padding: 11px 20px; border-radius: 9px; }
+  .site-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--s-line); }
+  .site-card { background: var(--white); padding: 18px 16px; }
+  .site-card-img {
+    width: 100%; height: 60px; border-radius: 8px; margin-bottom: 10px;
+    background: linear-gradient(135deg, #EAE6D9 0%, #D7D0BC 100%);
+    position: relative; overflow: hidden;
+  }
+  .site-card-img::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.35) 50%, transparent 60%);
+  }
+  .site-card-title { font-size: 12px; font-weight: 600; color: var(--s-ink); margin-bottom: 4px; }
+  .site-card-text { font-size: 11px; color: #8B9285; line-height: 1.5; }
+  .site-footer-strip {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 18px; border-top: 1px solid var(--s-line); background: var(--s-cream);
+  }
+  .site-footer-strip span { font-size: 10px; color: #8B9285; }
+
+  @media (min-width: 1080px) {
+    .hero { padding: 188px 56px 0; }
+    .hero-top { grid-template-columns: 1.3fr 1fr; gap: 64px; margin-bottom: 18px; }
+    .hero-text { max-width: 480px; }
+    h1 { font-size: 60px; line-height: 1.03; letter-spacing: -0.03em; margin-bottom: 24px; }
+    .subheadline { font-size: 17px; line-height: 1.65; margin-bottom: 36px; }
+    .cta-block { padding: 22px 24px; width: fit-content; }
+    .btn-primary { width: auto; padding: 17px 28px; font-size: 16.5px; }
+    .trust-label { font-size: 13px; }
+    .mockup-floor { bottom: -60px; height: 70px; }
+    .browser { border-radius: 16px; transform: perspective(1800px) rotateY(-3deg) rotateX(1deg); }
+    .browser-bar { padding: 13px 16px; gap: 18px; }
+    .browser-dots span { width: 10px; height: 10px; }
+    .browser-url { padding: 6px 14px; font-size: 11.5px; }
+    .site-nav { padding: 18px 30px; }
+    .site-logo { font-size: 13.5px; }
+    .site-logo .mk { width: 18px; height: 18px; }
+    .site-nav-links { display: flex; gap: 24px; }
+    .site-nav-links span { font-size: 11.5px; color: #69715F; }
+    .site-nav-btn { font-size: 11.5px; padding: 8px 15px; }
+    .site-hero { padding: 64px 48px 56px; }
+    .site-eyebrow { font-size: 10.5px; padding: 6px 13px; margin-bottom: 22px; }
+    .site-h1 { font-size: 36px; margin-bottom: 16px; }
+    .site-sub { font-size: 13.5px; max-width: 400px; margin-bottom: 28px; }
+    .site-btns { flex-direction: row; justify-content: center; gap: 12px; }
+    .site-btn-primary, .site-btn-secondary { padding: 12px 24px; }
+    .site-grid { grid-template-columns: repeat(3, 1fr); }
+    .site-card { padding: 26px 22px; }
+    .site-card-img { height: 78px; margin-bottom: 14px; }
+    .site-footer-strip { padding: 16px 30px; }
+    .site-footer-strip span { font-size: 10.5px; }
+  }
+
+  /* ---------- SECTIE: HET PROBLEEM ---------- */
+  .problem {
+    background: var(--stone-50);
+    padding: 128px 56px;
+    position: relative;
+  }
+  .problem-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .problem-eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--stone-500);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.05s forwards;
+  }
+
+  .problem h2 {
+    font-size: 52px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    color: var(--ink);
+    margin-bottom: 96px;
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s forwards;
+  }
+  .problem h2 .muted { color: var(--stone-300); }
+
+  .problem-points {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    position: relative;
+  }
+  .problem-points::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--copper) 0%, var(--stone-100) 8%);
+  }
+  .problem-point {
+    padding: 32px 0 0;
+    text-align: left;
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+  .problem-point:nth-child(1) { animation-delay: 0.28s; }
+  .problem-point:nth-child(2) { animation-delay: 0.36s; }
+  .problem-point:nth-child(3) { animation-delay: 0.44s; }
+
+  .problem-point .num {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--stone-300);
+    margin-bottom: 18px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.03em;
+  }
+  .problem-point p {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--stone-900);
+    max-width: 280px;
+    letter-spacing: -0.005em;
+  }
+  .problem-point p strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 860px) {
+    .problem h2 { font-size: 38px; margin-bottom: 64px; }
+  }
+
+  @media (max-width: 640px) {
+    .navbar { padding: 0 20px; height: 76px; }
+    .nav-links { display: none; }
+    .problem { padding: 80px 20px; }
+    .problem h2 { font-size: 30px; margin-bottom: 48px; }
+    .problem-points {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .problem-points::before { display: none; }
+    .problem-point {
+      border-top: 1px solid var(--stone-100);
+      padding: 28px 0 0;
+    }
+    .problem-point:first-child { border-top: none; padding-top: 0; }
+  }
+
+  /* ---------- SECTIE 3: DE OPLOSSING ---------- */
+  .solution {
+    background: var(--white);
+    padding: 128px 56px;
+  }
+  .solution-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .solution-head {
+    max-width: 600px;
+    margin: 0 0 88px;
+  }
+  .solution-eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--copper-dark);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.05s forwards;
+  }
+  .solution h2 {
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.028em;
+    line-height: 1.12;
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s forwards;
+  }
+
+  .solution-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 56px;
+  }
+  .solution-card {
+    padding: 28px 0 0;
+    border-top: 1px solid var(--stone-100);
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+  .solution-card:nth-child(1) { animation-delay: 0.26s; }
+  .solution-card:nth-child(2) { animation-delay: 0.34s; }
+  .solution-card:nth-child(3) { animation-delay: 0.42s; }
+
+  .solution-card .icon {
+    width: 22px;
+    height: 22px;
+    margin-bottom: 24px;
+  }
+  .solution-card .icon svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--copper);
+  }
+  .solution-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .solution-card p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--stone-700);
+    max-width: 280px;
+  }
+
+  .solution-foot {
+    margin-top: 56px;
+    padding-top: 40px;
+    border-top: 1px solid var(--stone-100);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 40px;
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.5s forwards;
+  }
+  .solution-foot p {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--stone-900);
+    max-width: 520px;
+    letter-spacing: -0.005em;
+  }
+  .solution-foot .link {
+    flex-shrink: 0;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding-bottom: 2px;
+    border-bottom: 1.5px solid var(--ink);
+    transition: gap 0.2s ease-out, color 0.2s ease-out, border-color 0.2s ease-out;
+  }
+  .solution-foot .link svg { width: 15px; height: 15px; transition: transform 0.2s ease-out; }
+  .solution-foot .link:hover svg { transform: translateX(3px); }
+
+  @media (max-width: 900px) {
+    .solution-grid { grid-template-columns: 1fr; gap: 40px; }
+    .solution-card p { max-width: 100%; }
+    .solution-foot { flex-direction: column; align-items: flex-start; gap: 20px; }
+  }
+
+  @media (max-width: 640px) {
+    .solution { padding: 80px 20px; }
+    .solution-head { margin-bottom: 56px; }
+    .solution h2 { font-size: 30px; }
+  }
+
+  /* ---------- SECTIE 4: WERKWIJZE ---------- */
+  .process {
+    background: var(--stone-50);
+    padding: 128px 56px;
+  }
+  .process-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .process-head {
+    max-width: 560px;
+    margin: 0 0 96px;
+  }
+  .process-eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--stone-500);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.05s forwards;
+  }
+  .process h2 {
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.028em;
+    line-height: 1.12;
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s forwards;
+  }
+
+  .process-steps {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .process-line {
+    position: absolute;
+    top: 13px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--stone-200, #DBDEE2);
+    overflow: hidden;
+  }
+  .process-line::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--copper);
+    animation: drawLine 1s cubic-bezier(0.16,1,0.3,1) 0.5s forwards;
+  }
+  @keyframes drawLine { to { width: 100%; } }
+
+  .process-step {
+    position: relative;
+    padding-top: 48px;
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+  .process-step:nth-child(2) { animation-delay: 0.3s; }
+  .process-step:nth-child(3) { animation-delay: 0.4s; }
+  .process-step:nth-child(4) { animation-delay: 0.5s; }
+  .process-step:nth-child(5) { animation-delay: 0.6s; }
+
+  .process-step .num {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 1px solid var(--stone-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--stone-700);
+    font-variant-numeric: tabular-nums;
+  }
+  .process-step h3 {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .process-step p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--stone-700);
+    max-width: 240px;
+  }
+  .process-step .when {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 12.5px;
+    color: var(--stone-500);
+  }
+
+  @media (max-width: 900px) {
+    .process-steps { grid-template-columns: 1fr; gap: 36px; }
+    .process-line { display: none; }
+    .process-step { padding-top: 0; padding-left: 40px; }
+    .process-step .num { top: 1px; }
+  }
+
+  @media (max-width: 640px) {
+    .process { padding: 80px 20px; }
+    .process-head { margin-bottom: 56px; }
+    .process h2 { font-size: 30px; }
+  }
+
+  /* ---------- SECTIE: WAT JE KUNT VERWACHTEN (mobile-first) ---------- */
+  .expect {
+    background: var(--white);
+    padding: 72px 20px;
+  }
+  .expect-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .expect-head {
+    margin: 0 0 48px;
+  }
+  .expect-eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--copper-dark);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.05s forwards;
+  }
+  .expect h2 {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 14px;
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s forwards;
+  }
+  .expect-head p {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--stone-700);
+    max-width: 480px;
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.22s forwards;
+  }
+
+  .expect-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .expect-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 24px 0;
+    border-top: 1px solid var(--stone-100);
+    opacity: 0;
+    animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
+    min-height: 44px;
+  }
+  .expect-item:last-child { border-bottom: 1px solid var(--stone-100); }
+  .expect-item:nth-child(1) { animation-delay: 0.28s; }
+  .expect-item:nth-child(2) { animation-delay: 0.34s; }
+  .expect-item:nth-child(3) { animation-delay: 0.40s; }
+  .expect-item:nth-child(4) { animation-delay: 0.46s; }
+  .expect-item:nth-child(5) { animation-delay: 0.52s; }
+
+  .expect-item .ico {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    stroke: var(--copper);
+  }
+  .expect-item .txt h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 5px;
+    letter-spacing: -0.005em;
+  }
+  .expect-item .txt p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--stone-700);
+    max-width: 480px;
+  }
+
+  /* desktop opschaling (min-width, mobile-first) */
+  @media (min-width: 780px) {
+    .expect { padding: 128px 56px; }
+    .expect-head {
+      max-width: 600px;
+      margin: 0 auto 80px;
+      text-align: center;
+    }
+    .expect-head p { margin: 0 auto; }
+    .expect h2 { font-size: 44px; }
+    .expect-head p { font-size: 17px; }
+
+    .expect-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 0 64px;
+      border-top: 1px solid var(--stone-100);
+    }
+    .expect-item {
+      padding: 36px 0;
+      border-top: none;
+    }
+    .expect-item:last-child { border-bottom: none; }
+    .expect-item:nth-child(3),
+    .expect-item:nth-child(4) {
+      border-top: 1px solid var(--stone-100);
+    }
+  }
+
+  /* ---------- SECTIE 8: FAQ (mobile-first) ---------- */
+  .faq {
+    background: var(--stone-50);
+    padding: 72px 20px;
+  }
+  .faq-inner {
+    max-width: 740px;
+    margin: 0 auto;
+  }
+  .faq-head { margin: 0 0 40px; }
+  .faq-eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--stone-500);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.05s forwards;
+  }
+  .faq h2 {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s forwards;
+  }
+
+  .faq-list { display: flex; flex-direction: column; }
+  .faq-item {
+    border-top: 1px solid var(--stone-100);
+    opacity: 0;
+    animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+  .faq-item:last-child { border-bottom: 1px solid var(--stone-100); }
+  .faq-item:nth-child(1) { animation-delay: 0.25s; }
+  .faq-item:nth-child(2) { animation-delay: 0.3s; }
+  .faq-item:nth-child(3) { animation-delay: 0.35s; }
+  .faq-item:nth-child(4) { animation-delay: 0.4s; }
+  .faq-item:nth-child(5) { animation-delay: 0.45s; }
+
+  .faq-q {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 0;
+    min-height: 44px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .faq-q span {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .faq-q .chev {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    stroke: var(--stone-500);
+    transition: transform 0.25s ease-out;
+  }
+  .faq-item.open .faq-q .chev { transform: rotate(180deg); }
+
+  .faq-a {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.25s ease-out;
+  }
+  .faq-a-inner {
+    padding: 0 0 20px;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--stone-700);
+    max-width: 540px;
+  }
+
+  .faq-foot {
+    margin-top: 40px;
+    text-align: center;
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.5s forwards;
+  }
+  .faq-foot p {
+    font-size: 14.5px;
+    color: var(--stone-500);
+    margin-bottom: 12px;
+  }
+  .faq-foot a {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--ink);
+    padding-bottom: 2px;
+  }
+
+  @media (min-width: 780px) {
+    .faq { padding: 128px 56px; }
+    .faq-head { text-align: center; margin: 0 auto 56px; }
+    .faq h2 { font-size: 40px; }
+    .faq-q span { font-size: 17px; }
+    .faq-a-inner { font-size: 15px; margin: 0 auto; }
+    .faq-foot { margin-top: 48px; }
+  }
+
+  /* ---------- SECTIE 9: LAATSTE CTA (mobile-first) ---------- */
+  .final-cta {
+    background: var(--ink);
+    padding: 80px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .final-cta-glow {
+    position: absolute;
+    top: -180px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(201,102,58,0.16) 0%, transparent 68%);
+    pointer-events: none;
+  }
+  .final-cta-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .final-cta h2 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.05s forwards;
+  }
+  .final-cta-sub {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--stone-300);
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s forwards;
+  }
+
+  .final-cta-btn {
+    display: block;
+    width: 100%;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    background: linear-gradient(180deg, #D4754A 0%, var(--copper) 55%, var(--copper-dark) 100%);
+    padding: 19px 32px;
+    border-radius: 12px;
+    text-decoration: none;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.22),
+      0 1px 2px rgba(0,0,0,0.2),
+      0 16px 36px rgba(201,102,58,0.32);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.25s forwards;
+    min-height: 44px;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  }
+  .final-cta-btn:active { transform: translateY(1px); }
+
+  .final-cta-trust {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13.5px;
+    color: var(--stone-300);
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.35s forwards;
+  }
+  .final-cta-trust .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #5FD896;
+    box-shadow: 0 0 0 3px rgba(95,216,150,0.18);
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 780px) {
+    .final-cta { padding: 140px 56px; }
+    .final-cta h2 { font-size: 48px; }
+    .final-cta-sub { font-size: 18px; margin-bottom: 44px; }
+    .final-cta-btn {
+      display: inline-block;
+      width: auto;
+      padding: 19px 40px;
+      font-size: 17px;
+    }
+    .final-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.28),
+        0 1px 2px rgba(0,0,0,0.2),
+        0 22px 48px rgba(201,102,58,0.4);
+    }
+  }  /* ---------- FOOTER (mobile-first) ---------- */
+  .site-footer {
+    background: var(--white);
+    border-top: 1px solid var(--stone-100);
+    padding: 56px 20px 28px;
+  }
+  .site-footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .footer-top {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    margin-bottom: 40px;
+  }
+  .footer-brand .logo { margin-bottom: 14px; }
+  .footer-brand p {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--stone-500);
+    max-width: 280px;
+  }
+  .footer-col h4 {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--stone-500);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 14px;
+  }
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-col a {
+    font-size: 14px;
+    color: var(--stone-700);
+    text-decoration: none;
+    transition: color 0.15s ease-out;
+  }
+  .footer-col a:hover { color: var(--ink); }
+  .footer-static {
+    font-size: 14px;
+    color: var(--stone-500);
+  }
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 24px;
+    border-top: 1px solid var(--stone-100);
+    font-size: 12.5px;
+    color: var(--stone-500);
+  }
+  .footer-legal {
+    display: flex;
+    gap: 20px;
+  }
+  .footer-legal a {
+    font-size: 12.5px;
+    color: var(--stone-500);
+    text-decoration: none;
+  }
+  .footer-legal a:hover { color: var(--ink); }
+
+  @media (min-width: 780px) {
+    .site-footer { padding: 72px 56px 32px; }
+    .footer-top {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    .footer-brand { flex: 1.4; }
+    .footer-col { flex: 1; }
+    .footer-bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 32 32" fill="none">
+        <rect x="1" y="1" width="30" height="30" rx="8" fill="#14161A"/>
+        <path d="M9 21V11L16 16L23 11V21" stroke="#C9663A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="logo-word">DZ <span>Brands</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="#diensten">Diensten</a>
+      <a href="werk.html">Werk</a>
+      <a href="#over-ons">Over ons</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Plan gesprek</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-glow"></div>
+
+    <div class="hero-top">
+      <div class="hero-text">
+        <h1>Een website die werkt.<br>Terwijl <em>jij</em> werkt.</h1>
+        <p class="subheadline">
+          Ik bouw websites voor vakbedrijven die laten zien wie je bent — zodat klanten je vertrouwen voordat ze ooit gebeld hebben.
+        </p>
+        <div class="cta-block">
+          <a href="#contact" class="btn-primary">
+            Plan een vrijblijvend gesprek
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <div class="trust-label"><span class="dot"></span>Reactie binnen 1 werkdag — vrijblijvend</div>
+        </div>
+      </div>
+
+      <div class="mockup-stage">
+        <div class="mockup-floor"></div>
+        <div class="browser">
+          <div class="browser-bar">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="browser-url">groenhoveniers.nl</div>
+          </div>
+          <div class="site">
+            <div class="site-nav">
+              <div class="site-logo"><div class="mk"></div>Groen & Co</div>
+              <div class="site-nav-links"><span>Diensten</span><span>Projecten</span><span>Over ons</span></div>
+              <div class="site-nav-btn">Offerte</div>
+            </div>
+            <div class="site-hero">
+              <div class="site-eyebrow"><span class="d"></span>Hoveniersbedrijf · regio Utrecht</div>
+              <div class="site-h1">Een tuin die net zo<br>verzorgd oogt als uw huis.</div>
+              <div class="site-sub">Aanleg, onderhoud en tuinontwerp door vakmensen met oog voor detail — al meer dan 15 jaar.</div>
+              <div class="site-btns">
+                <div class="site-btn-primary">Plan een tuinadvies</div>
+                <div class="site-btn-secondary">Bekijk projecten</div>
+              </div>
+            </div>
+            <div class="site-grid">
+              <div class="site-card"><div class="site-card-img"></div><div class="site-card-title">Tuinontwerp</div><div class="site-card-text">Op maat, passend bij uw woning.</div></div>
+              <div class="site-card"><div class="site-card-img"></div><div class="site-card-title">Aanleg</div><div class="site-card-text">Van schets tot afgewerkte tuin.</div></div>
+              <div class="site-card"><div class="site-card-img"></div><div class="site-card-title">Onderhoud</div><div class="site-card-text">Het hele jaar rond verzorgd.</div></div>
+            </div>
+            <div class="site-footer-strip"><span>© Groen & Co Hoveniers</span><span>KVK 87654321</span></div>
+          </div>
+        </div>
+        <div class="speed-chip"><span class="dot"></span>Deze pagina laadde in 0,4 sec</div>
+      </div>
+    </div>
+  </section>
+  <section class="problem">
+    <div class="problem-inner">
+      <div class="problem-eyebrow">Herkenbaar?</div>
+      <h2>Je werk verdient meer<br><span class="muted">klanten dan het nu krijgt.</span></h2>
+
+      <div class="problem-points">
+        <div class="problem-point">
+          <div class="num">01</div>
+          <p>Klanten zoeken je op voordat ze bellen. Vinden ze te weinig, dan kiezen ze de volgende.</p>
+        </div>
+        <div class="problem-point">
+          <div class="num">02</div>
+          <p>Je beste werk wordt nooit gezien. Klanten vormen een oordeel voordat ze ooit met je gesproken hebben.</p>
+        </div>
+        <div class="problem-point">
+          <div class="num">03</div>
+          <p>Je groeit op vakmanschap en mond-tot-mondreclame. Die groei kent op een gegeven moment een grens.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="solution">
+    <div class="solution-inner">
+      <div class="solution-head">
+        <div class="solution-eyebrow">Waarom DZ Brands</div>
+        <h2>Niet de grootste. Wel de scherpste keuze.</h2>
+      </div>
+
+      <div class="solution-grid">
+        <div class="solution-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4H20V16H7L4 19V4Z"></path></svg>
+          </div>
+          <h3>Eén persoon, geen wisselend team</h3>
+          <p>Geen project dat wordt doorgeschoven naar een junior of een ander bureau. Wie het ontwerpt, bouwt het ook — van begin tot livegang.</p>
+        </div>
+        <div class="solution-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M8 3V7M16 3V7M4 10H20"></path></svg>
+          </div>
+          <h3>Risico op tijd ligt bij mij, niet bij jou</h3>
+          <p>De prijs die we afspreken staat vast — ook als het werk meer tijd kost dan ik vooraf inschatte. Dat risico is voor mij, niet voor jou.</p>
+        </div>
+        <div class="solution-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21L12 3L21 21H3Z"></path><path d="M9 21V13H15V21"></path></svg>
+          </div>
+          <h3>Ik bouw alleen voor vakbedrijven</h3>
+          <p>Geen webshops, geen horeca — uitsluitend vakbedrijven. Ik ken de klanten van een hovenier of installateur, en ontwerp daar gericht voor.</p>
+        </div>
+      </div>
+
+      <div class="solution-foot">
+        <p>Geen kostenpost dus, maar iets dat zich terugbetaalt — elke nieuwe aanvraag die er anders niet was geweest.</p>
+        <a href="#werkwijze" class="link">Bekijk hoe ik werk<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+      </div>
+    </div>
+  </section>
+  <section class="process" id="werkwijze">
+    <div class="process-inner">
+      <div class="process-head">
+        <div class="process-eyebrow">Werkwijze</div>
+        <h2>Van eerste gesprek tot livegang.</h2>
+      </div>
+
+      <div class="process-steps">
+        <div class="process-line"></div>
+
+        <div class="process-step">
+          <div class="num">01</div>
+          <h3>Kennismaking</h3>
+          <p>Een kort, vrijblijvend gesprek over je bedrijf en je doelen.</p>
+          <span class="when">±30 minuten</span>
+        </div>
+        <div class="process-step">
+          <div class="num">02</div>
+          <h3>Ontwerp &amp; bouw</h3>
+          <p>Maatwerk, geen sjabloon — van eerste schets tot werkende website.</p>
+          <span class="when">2–3 weken</span>
+        </div>
+        <div class="process-step">
+          <div class="num">03</div>
+          <h3>Livegang</h3>
+          <p>Je website gaat live. Ook daarna blijf ik bereikbaar.</p>
+          <span class="when">Doorlopend</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="expect">
+    <div class="expect-inner">
+      <div class="expect-head">
+        <div class="expect-eyebrow">Wat je kunt verwachten</div>
+        <h2>Waar je op kunt rekenen.</h2>
+        <p>Vier dingen die vanaf het eerste gesprek gewoon waar zijn.</p>
+      </div>
+
+      <div class="expect-list">
+        <div class="expect-item">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7V12L15 14"></path></svg>
+          <div class="txt"><h3>Persoonlijk antwoord binnen 1 werkdag</h3><p>Geen wachtrij, geen ticketsysteem. Je krijgt persoonlijk antwoord, meestal sneller.</p></div>
+        </div>
+        <div class="expect-item">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4H20V16H7L4 19V4Z"></path></svg>
+          <div class="txt"><h3>Eén aanspreekpunt: mij</h3><p>Je spreekt rechtstreeks met de persoon die je website bouwt. Niet met iemand die jouw vragen eerst moet doorgeven.</p></div>
+        </div>
+        <div class="expect-item">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M8 3V7M16 3V7M4 10H20"></path></svg>
+          <div class="txt"><h3>Vaste prijsafspraak vooraf</h3><p>Voor we beginnen weet je precies wat het kost. Geen verrassingen achteraf.</p></div>
+        </div>
+        <div class="expect-item">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L4 7V12C4 17 7.5 20 12 21C16.5 20 20 17 20 12V7L12 3Z"></path></svg>
+          <div class="txt"><h3>De website blijft van jou</h3><p>Je kunt de hosting door mij laten verzorgen, maar dat is nooit verplicht. Wil je later overstappen? Dan neem je je website gewoon mee.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="faq">
+    <div class="faq-inner">
+      <div class="faq-head">
+        <div class="faq-eyebrow">Veelgestelde vragen</div>
+        <h2>Nog twijfels?</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" type="button">
+            <span>Ik heb nog geen teksten of foto's. Kan dat?</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Ja. De meeste klanten hebben dat niet als ze starten. Ik help met de structuur en de teksten, en denk mee over welk beeldmateriaal wél al bruikbaar is — je hoeft niet alles vooraf klaar te hebben.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button">
+            <span>Mijn huidige website werkt nog. Waarom zou ik investeren?</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">"Werken" en "klanten opleveren" zijn niet hetzelfde. Misschien is jouw site prima. Misschien mist hij net dat laatste duwtje. Dat weet je pas als iemand er kritisch naar kijkt — en dat doe ik graag, vrijblijvend.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button">
+            <span>Wat kost een website ongeveer?</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Dat hangt af van wat je nodig hebt. Na een kort gesprek leg ik een vast bedrag voor je vast — die prijs staat dan, ook als het werk meer tijd kost dan ik vooraf inschatte.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button">
+            <span>Kan ik later nog dingen laten aanpassen?</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Ja, een website kan altijd meegroeien. Voor technisch onderhoud en kleine aanpassingen kun je kiezen voor hosting via mij — dan regel ik dat voor je. Grotere wijzigingen bespreken we gewoon even, net als bij de eerste bouw.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button">
+            <span>Zit ik na het eerste gesprek ergens aan vast?</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Nee. Het is een kennismaking, geen verkoopgesprek. Je beslist daarna pas of het past.</div></div>
+        </div>
+      </div>
+
+      <div class="faq-foot">
+        <p>Nog een andere vraag?</p>
+        <a href="#contact">Stuur 'm gewoon even →</a>
+      </div>
+    </div>
+  </section>
+  <section class="final-cta" id="contact">
+    <div class="final-cta-glow"></div>
+    <div class="final-cta-inner">
+      <h2>Klaar voor een site die wél iets oplevert?</h2>
+      <p class="final-cta-sub">Stuur een berichtje, ook al weet je nog niet precies wat je nodig hebt. Ik denk gewoon mee.</p>
+      <a href="#" class="final-cta-btn" title="Hier komt het echte contactformulier of een mailto/tel-link">Plan een vrijblijvend gesprek</a>
+      <div class="final-cta-trust"><span class="dot"></span>Reactie binnen 1 werkdag — vrijblijvend en zonder verplichtingen</div>
+    </div>
+  </section>
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo">
+            <svg class="logo-mark" viewBox="0 0 32 32" fill="none">
+              <rect x="1" y="1" width="30" height="30" rx="8" fill="#14161A"/>
+              <path d="M9 21V11L16 16L23 11V21" stroke="#C9663A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="logo-word">DZ <span>Brands</span></div>
+          </div>
+          <p>Snelle, professionele websites voor Nederlandse vakbedrijven.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigatie</h4>
+          <a href="#diensten">Diensten</a>
+          <a href="werk.html">Werk</a>
+          <a href="#over-ons">Over ons</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:hallo@dzbrands.nl">hallo@dzbrands.nl</a>
+          <a href="tel:+31600000000">06 00 00 00 00</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Bedrijfsgegevens</h4>
+          <span class="footer-static">DZ Brands</span>
+          <span class="footer-static">KVK 00000000</span>
+          <span class="footer-static">Nederland</span>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 DZ Brands. Alle rechten voorbehouden.</span>
+        <div class="footer-legal">
+          <a href="#">Privacybeleid</a>
+          <a href="#">Algemene voorwaarden</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.faq-item').forEach(function(item) {
+      var btn = item.querySelector('.faq-q');
+      var ans = item.querySelector('.faq-a');
+      var inner = item.querySelector('.faq-a-inner');
+      btn.addEventListener('click', function() {
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
+          if (openItem !== item) {
+            openItem.classList.remove('open');
+            openItem.querySelector('.faq-a').style.height = '0px';
+          }
+        });
+        if (isOpen) {
+          item.classList.remove('open');
+          ans.style.height = '0px';
+        } else {
+          item.classList.add('open');
+          ans.style.height = inner.offsetHeight + 'px';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
